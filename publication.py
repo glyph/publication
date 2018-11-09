@@ -42,6 +42,7 @@ PRIVATE_NAME = "_private"
 
 _nothing = object()
 
+
 def publish():
     # type: () -> None
     """
@@ -58,7 +59,17 @@ def publish():
     public = ModuleType(name)
     private = sys.modules[name]
     sys.modules[name] = public
-    names = all + ["__doc__", "__all__", "__path__"]
+    names = all + [
+        "__all__",
+        "__cached__",
+        "__doc__",
+        "__file__",
+        "__loader__",
+        "__name__",
+        "__package__",
+        "__path__",
+        "__spec__",
+    ]
     for published in names:
         value = getattr(private, published, _nothing)
         if value is not _nothing:
