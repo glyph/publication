@@ -9,7 +9,46 @@ Publication makes it easy.
 The Problem
 -----------
 
-You want to write a library that makes it easy to zorf a sprocket.
+As `Hyrum's Law <http://www.hyrumslaw.com>`_ somewhat grimly states,
+
+    | With a sufficient number of users of an API,
+    | it does not matter what you promise in the contract:
+    | all observable behaviors of your system
+    | will be depended on by somebody.
+
+In general, Python famously has a somewhat different philosophical view of this
+reality.  We assume each other to be `responsible users
+<https://github.com/realpython/python-guide/pull/524/files>`_ of the libraries
+we consume.  Mucking with implementation details might break every time you
+upgrade, but it's sufficiently useful for testing, debugging, and
+experimentation that retaining that ability is worth paying the cost.
+
+But, critical to this assumption is that everybody *knows* when they're
+breaking into the "private" area of the library's interface.  Here, there's a
+mismatch of expectations:
+
+- *library authors* write documentation, and then think that users sit down and
+  read the documentation, front to back, and learn about what the "public"
+  interface is by doing so.  they then assume that users will know that they've
+  used private implementation details if they ever deviate from these
+  documented features.
+- *library users* ``pip install`` a thing, open up a REPL, import the module,
+  and discover the library by doing ``dir()`` on the module and its contents,
+  assuming that their program is not using any private implementation details
+  as long as they never had to type ``library._something_private()`` while
+  doing so.  If they ever encounter a traceback they may consult the
+  documentation, briefly, until it is resolved.
+
+Publication makes it possible to align the wildly divergent expectations of
+these groups, so that users can still get the benefits of being able to use
+internal details if they want, but they'll know that they're doing so.  It
+makes the runtime namespace of your module look like the public documentation
+of your library.
+
+How does this look in practice?
+-------------------------------
+
+You, a prospective library author, want to write a library that makes it easy to zorf a sprocket.
 Great! You do, and it looks like this:
 
 .. code:: python
