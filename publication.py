@@ -1,6 +1,6 @@
 
 """
-C{publication} helps you maintain public-api-friendly modules by preventing
+Publication helps you maintain public-api-friendly modules by preventing \
 unintentional access to private implementation details via introspection.
 
 It's easy to use::
@@ -78,7 +78,7 @@ def publish():
     sys.modules[".".join([name, PRIVATE_NAME])] = private
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 __all__ = ["publish", "__version__"]
 publish()
