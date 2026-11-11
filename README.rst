@@ -228,3 +228,8 @@ type-checking access to a different module’s private details,
 
    def returns_a() -> A:
        ...
+
+AI Policy
+---------
+
+Publication follows the `Twisted AI Policy <https://docs.twisted.org/en/latest/development/ai-policy.html>`_. This means this project does not allow the inclusion of the outputs of generative AI tools.
